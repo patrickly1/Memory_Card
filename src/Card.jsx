@@ -7,10 +7,10 @@ export default function Card({ pic,
         <div className="cardContainer">
             <button onClick={() => handleCardClick(index)}>
                 <div className="buttonPic">
-                    buttonPic {pic}
+                    {pic}
                 </div>
                 <div className="buttonTitle">
-                    buttonTitle {title}
+                    {title}
                 </div>
             </button>
         </div>

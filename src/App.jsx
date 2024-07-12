@@ -25,6 +25,7 @@ function App() {
   const [shuffleTrigger, setShuffleTrigger] = useState(0);
   const [seenPokemonCards, setSeenPokemonCards] = useState(new Set());
   const [duplicatePokemonCard, setDuplicatePokemonCard] = useState(false);
+  const [maxHighScore, setMaxHighScore] = useState(0);
 
   useEffect(() => {
     //shuffle the array of pokemon cards
@@ -33,7 +34,6 @@ function App() {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
       }
-
       return array;
     }
 
@@ -41,15 +41,25 @@ function App() {
     setShuffledPokemonCards(shuffledPokemonCards);
   }, [shuffleTrigger]); // dependency on shuffleTrigger
 
+  // handle card click
   const handleCardClick = (index) => {
+    // Pass the index of the card clicked to find the card in shuffledPokemonCards
     const card = shuffledPokemonCards[index];
+    // Check if card has been clicked before
     if (seenPokemonCards.has(card.title)) {
+      //Reset the counter and seen cards
       setDuplicatePokemonCard(true);
+      setShuffleTrigger(0);
+      setSeenPokemonCards(new Set());
     } else{
+      setDuplicatePokemonCard(false);
       const newSet = new Set(seenPokemonCards);
       newSet.add(card.title);
       setSeenPokemonCards(newSet);
       setShuffleTrigger(prev => prev + 1);
+      if (maxHighScore === shuffleTrigger) {
+        setMaxHighScore(prev => prev + 1);
+      }
     }
   };
 
@@ -59,8 +69,9 @@ function App() {
         <h2>
         Memory Card Game  
         </h2>
-        <div>Times Clicked {shuffleTrigger}</div>
-        <div>{duplicatePokemonCard && "Duplicate card clicked!"}</div>
+        <div className="clickCounter">Times Clicked {shuffleTrigger}</div>
+        <div className="maxClickCounter">Max counter {maxHighScore}</div>
+        <div className="duplicateAlert">{duplicatePokemonCard && "Duplicate card clicked!"}</div>
       </div>
       <div className="bottomContainer">
         {shuffledPokemonCards.map((pokemonCard, index) => (
