@@ -27,6 +27,8 @@ function App() {
   const [duplicatePokemonCard, setDuplicatePokemonCard] = useState(false);
   const [maxHighScore, setMaxHighScore] = useState(0);
 
+
+
   useEffect(() => {
     //shuffle the array of pokemon cards
     function shuffleArray(array) {
@@ -47,16 +49,33 @@ function App() {
     const card = shuffledPokemonCards[index];
     // Check if card has been clicked before
     if (seenPokemonCards.has(card.title)) {
-      //Reset the counter and seen cards
+      //Alert the user that a duplicate card has been clicked
       setDuplicatePokemonCard(true);
+
+      //Reset the counter 
       setShuffleTrigger(0);
+
+      //Reset the Set of seen cards
       setSeenPokemonCards(new Set());
     } else{
+      //If the user was previously alerted of a duplicate card has been clicked, reset
       setDuplicatePokemonCard(false);
+
+      //Create a new Set
       const newSet = new Set(seenPokemonCards);
+
+      //Add current clicked card to Set of seen cards
       newSet.add(card.title);
+
+      //Add the newly created Set
       setSeenPokemonCards(newSet);
+
+      //Increase the score counter
       setShuffleTrigger(prev => prev + 1);
+
+      //The max high score will only be increased if it is equal to the current score.
+      //There will never be a case where the max high score will be less than
+      //the current score. If it is greater than the current score, ignore. 
       if (maxHighScore === shuffleTrigger) {
         setMaxHighScore(prev => prev + 1);
       }
@@ -67,10 +86,10 @@ function App() {
     <div className="container">
       <div className="topContainer">
         <h2>
-        Memory Card Game  
+        Pokemon Memory Card Game  
         </h2>
-        <div className="clickCounter">Times Clicked {shuffleTrigger}</div>
-        <div className="maxClickCounter">Max counter {maxHighScore}</div>
+        <div className="clickCounter">Current Score: {shuffleTrigger}</div>
+        <div className="maxClickCounter">Max Score: {maxHighScore}</div>
         <div className="duplicateAlert">{duplicatePokemonCard && "Duplicate card clicked!"}</div>
       </div>
       <div className="bottomContainer">
