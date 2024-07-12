@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios'
+import React from "react";
+import { useState, useEffect } from 'react';
 
-export default function PokemonImage(pokemonName) {
+export default function PokemonImage({ pokemonName }) {
     const [imageUrl, setImageUrl] = useState('');
     const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchPokemonImage = async () => {
             try {
-                const response = await axios.get(`https:/pokeapi.co/api/v2/pokemon/${pokemonName}`);
-                const imageUrl = response.data.sprites.front_shiny;
+                const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+                const data = await response.json();
+                const imageUrl = data.sprites.front_shiny;
                 setImageUrl(imageUrl);
             } catch (error) {
                 setError("Failed to fetch image");
@@ -18,11 +19,13 @@ export default function PokemonImage(pokemonName) {
         };
         
         fetchPokemonImage();
-    }, []);
+    }, [pokemonName]);
 
     return (
         <div>
-            
+            {error && <div>{error}</div>}
+            {imageUrl && <img src={imageUrl} alt={pokemonName}/>}
+            {pokemonName}
         </div>
     )
 }

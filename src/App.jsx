@@ -3,22 +3,22 @@ import Card from './Card'
 
 function App() {
   const pokemonCards = [
-    { pic: "1", title: "1"},
-    { pic: "2", title: "2"},
-    { pic: "3", title: "3"},
-    { pic: "4", title: "4"},
-    { pic: "5", title: "5"},
-    { pic: "6", title: "6"},
-    { pic: "7", title: "7"},
-    { pic: "8", title: "8"},
-    { pic: "9", title: "9"},
-    { pic: "10", title: "10"},
-    { pic: "11", title: "11"},
-    { pic: "12", title: "12"},
-    { pic: "13", title: "13"},
-    { pic: "14", title: "14"},
-    { pic: "15", title: "15"},
-    { pic: "16", title: "16"},
+    { pic: "1", title: "articuno"},
+    { pic: "2", title: "zapdos"},
+    { pic: "3", title: "moltres"},
+    { pic: "4", title: "mewtwo"},
+    { pic: "5", title: "mew"},
+    { pic: "6", title: "raikou"},
+    { pic: "7", title: "entei"},
+    { pic: "8", title: "suicune"},
+    { pic: "9", title: "lugia"},
+    { pic: "10", title: "ho-oh"},
+    { pic: "11", title: "celebi"},
+    { pic: "12", title: "kyogre"},
+    { pic: "13", title: "groudon"},
+    { pic: "14", title: "rayquaza"},
+    { pic: "15", title: "latias"},
+    { pic: "16", title: "latios"},
   ]
 
   const [shuffledPokemonCards, setShuffledPokemonCards] = useState([]);
@@ -100,6 +100,7 @@ function App() {
             title={pokemonCard.title}
             index={index}
             handleCardClick={handleCardClick}
+            pokemonName={pokemonCard.title}
           />
         ))}
       </div>
