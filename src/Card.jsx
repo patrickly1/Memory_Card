@@ -1,8 +1,7 @@
 import React from 'react';
 import PokemonImage from "./PokemonImage";
 
-export default function Card({ pic, 
-    title ,
+export default function Card({
     index,
     handleCardClick,
     pokemonName
@@ -10,12 +9,6 @@ export default function Card({ pic,
     return (
         <div className="cardContainer">
             <button onClick={() => handleCardClick(index)}>
-                <div className="buttonPic">
-                    {pic}
-                </div>
-                <div className="buttonTitle">
-                    {title}
-                </div>
                 <PokemonImage
                     pokemonName={pokemonName}
                 />

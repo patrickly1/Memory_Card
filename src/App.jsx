@@ -1,24 +1,26 @@
-import { useState, useEffect } from 'react'
-import Card from './Card'
+import { useState, useEffect } from 'react';
+import Card from './Card';
+import "./index.css";
 
 function App() {
+  //Pool of 16 pokemocards that we will later select from to populate the cards
   const pokemonCards = [
-    { pic: "1", title: "articuno"},
-    { pic: "2", title: "zapdos"},
-    { pic: "3", title: "moltres"},
-    { pic: "4", title: "mewtwo"},
-    { pic: "5", title: "mew"},
-    { pic: "6", title: "raikou"},
-    { pic: "7", title: "entei"},
-    { pic: "8", title: "suicune"},
-    { pic: "9", title: "lugia"},
-    { pic: "10", title: "ho-oh"},
-    { pic: "11", title: "celebi"},
-    { pic: "12", title: "kyogre"},
-    { pic: "13", title: "groudon"},
-    { pic: "14", title: "rayquaza"},
-    { pic: "15", title: "latias"},
-    { pic: "16", title: "latios"},
+    {title: "articuno"},
+    {title: "zapdos"},
+    {title: "moltres"},
+    {title: "mewtwo"},
+    {title: "mew"},
+    {title: "raikou"},
+    {title: "entei"},
+    {title: "suicune"},
+    {title: "lugia"},
+    {title: "ho-oh"},
+    {title: "celebi"},
+    {title: "kyogre"},
+    {title: "groudon"},
+    {title: "rayquaza"},
+    {title: "latias"},
+    {title: "latios"},
   ]
 
   const [shuffledPokemonCards, setShuffledPokemonCards] = useState([]);
@@ -84,20 +86,26 @@ function App() {
 
   return (
     <div className="container">
-      <div className="topContainer">
-        <h2>
-        Pokemon Memory Card Game  
-        </h2>
-        <div className="clickCounter">Current Score: {shuffleTrigger}</div>
-        <div className="maxClickCounter">Max Score: {maxHighScore}</div>
-        <div className="duplicateAlert">{duplicatePokemonCard && "Duplicate card clicked!"}</div>
+        <div className="topContainer">
+        <h2>Pokemon Memory Card Game</h2>
+        <div className="scoreContainer">
+          <div className="score">
+            <div className="scoreTitle">Current Score:</div>
+            <div className="scoreNumber">{shuffleTrigger}</div>
+          </div>
+          <div className="score">
+            <div className="scoreTitle">Max Score:</div>
+            <div className="scoreNumber">{maxHighScore}</div>
+          </div>
+        </div>
+        <div className="duplicateAlert">
+          {duplicatePokemonCard && "You clicked the same card, try again!"}
+        </div>
       </div>
       <div className="bottomContainer">
         {shuffledPokemonCards.map((pokemonCard, index) => (
           <Card
             key={index}
-            pic={pokemonCard.pic}
-            title={pokemonCard.title}
             index={index}
             handleCardClick={handleCardClick}
             pokemonName={pokemonCard.title}

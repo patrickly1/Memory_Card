@@ -22,10 +22,14 @@ export default function PokemonImage({ pokemonName }) {
     }, [pokemonName]);
 
     return (
-        <div>
+        <div className="pokemon">
             {error && <div>{error}</div>}
-            {imageUrl && <img src={imageUrl} alt={pokemonName}/>}
+            <div className="pokemonSprite">
+                {imageUrl && <img src={imageUrl} alt={pokemonName}/>}
+            </div>
+            <div className="pokemonName">
             {pokemonName}
+            </div>
         </div>
     )
 }
